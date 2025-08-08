@@ -1,13 +1,3 @@
-terraform {
-  required_version = ">= 1.0"
-  required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.23"
-    }
-  }
-}
-
 resource "kubernetes_manifest" "kubevirt_vm" {
   manifest = {
     apiVersion = "kubevirt.io/v1"
