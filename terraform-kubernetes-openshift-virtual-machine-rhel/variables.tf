@@ -62,17 +62,19 @@ variable "disk_size" {
 
 # VM Source Image
 variable "datasource_name" {
-  description = "Name of the datasource for the VM image (defaults based on vm_os_type if not specified)"
+  description = "Name of the datasource for the VM image (e.g., rhel9, rhel8, centos-stream9)"
   type        = string
-  default     = "rhel8"
+  default     = "rhel9"
 
   validation {
     condition = contains([
       "rhel9",
       "rhel8",
-      "rhel7"
+      "centos-stream9",
+      "centos-stream10",
+      "fedora"
     ], var.datasource_name)
-    error_message = "Invalid OS type. Supported values are: rhel9, rhel8, rhel7"
+    error_message = "Invalid OS type. Supported values are: rhel9, rhel8, centos-stream9, centos-stream10, fedora"
   }
 }
 
