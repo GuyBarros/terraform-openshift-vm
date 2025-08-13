@@ -103,24 +103,46 @@ variable "size" {
   description = "VM size (small, medium, large)"
   type        = string
   default     = "small"
+
+  validation {
+    condition = contains([
+      "tiny",
+      "small",
+      "medium",
+      "large"
+    ], var.size)
+    error_message = "Invalid VM size. Supported values are: tiny, small, medium, large"
+  }
 }
 
 variable "flavor" {
   description = "VM flavor"
   type        = string
   default     = "small"
+
+  validation {
+    condition = contains([
+      "tiny",
+      "small",
+      "medium",
+      "large"
+    ], var.flavor)
+    error_message = "Invalid VM flavor. Supported values are: tiny, small, medium, large"
+  }
 }
 
 variable "workload" {
   description = "Workload type (server, desktop)"
   type        = string
   default     = "server"
-}
 
-variable "os" {
-  description = "Operating system identifier"
-  type        = string
-  default     = "rhel9"
+  validation {
+    condition = contains([
+      "server",
+      "desktop",
+    ], var.workload)
+    error_message = "Invalid workload type. Supported values are: server, desktop"
+  }
 }
 
 # System Configuration
@@ -134,10 +156,13 @@ variable "run_strategy" {
   description = "VM run strategy (Halted, RerunOnFailure, Always)"
   type        = string
   default     = "RerunOnFailure"
-}
 
-variable "min_memory_bytes" {
-  description = "Minimum required memory in bytes for validation"
-  type        = number
-  default     = 1610612736
+  validation {
+    condition = contains([
+      "Halted",
+      "RerunOnFailure",
+      "Always"
+    ], var.run_strategy)
+    error_message = "Invalid VM run strategy. Supported values are: Halted, RerunOnFailure, Always"
+  }
 }

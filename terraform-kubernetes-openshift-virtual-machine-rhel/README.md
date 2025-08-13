@@ -45,10 +45,8 @@ No modules.
 | <a name="input_flavor"></a> [flavor](#input\_flavor) | VM flavor | `string` | `"small"` | no |
 | <a name="input_machine_type"></a> [machine\_type](#input\_machine\_type) | QEMU machine type | `string` | `"pc-q35-rhel9.4.0"` | no |
 | <a name="input_memory"></a> [memory](#input\_memory) | Guest memory allocation (e.g., '4Gi') | `string` | `"4Gi"` | no |
-| <a name="input_min_memory_bytes"></a> [min\_memory\_bytes](#input\_min\_memory\_bytes) | Minimum required memory in bytes for validation | `number` | `1610612736` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the virtual machine (also used as hostname) | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Kubernetes namespace for the VM | `string` | `"default"` | no |
-| <a name="input_os"></a> [os](#input\_os) | Operating system identifier | `string` | `"rhel9"` | no |
 | <a name="input_run_strategy"></a> [run\_strategy](#input\_run\_strategy) | VM run strategy (Halted, RerunOnFailure, Always) | `string` | `"RerunOnFailure"` | no |
 | <a name="input_size"></a> [size](#input\_size) | VM size (small, medium, large) | `string` | `"small"` | no |
 | <a name="input_workload"></a> [workload](#input\_workload) | Workload type (server, desktop) | `string` | `"server"` | no |

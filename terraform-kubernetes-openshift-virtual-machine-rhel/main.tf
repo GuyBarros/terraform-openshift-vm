@@ -40,11 +40,9 @@ resource "kubectl_manifest" "kubevirt_vm" {
     size     = var.size
     flavor   = var.flavor
     workload = var.workload
-    os       = var.os
 
     # System configuration
-    machine_type     = var.machine_type
-    run_strategy     = var.run_strategy
-    min_memory_bytes = var.min_memory_bytes
+    machine_type = var.machine_type
+    run_strategy = var.run_strategy
   })
 }

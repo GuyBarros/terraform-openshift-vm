@@ -26,7 +26,7 @@ spec:
     metadata:
       annotations:
         vm.kubevirt.io/flavor: ${flavor}
-        vm.kubevirt.io/os: ${os}
+        vm.kubevirt.io/os: ${datasource_name}
         vm.kubevirt.io/workload: ${workload}
       labels:
         kubevirt.io/domain: ${name}
