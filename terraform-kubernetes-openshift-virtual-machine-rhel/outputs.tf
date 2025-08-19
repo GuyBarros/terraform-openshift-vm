@@ -31,3 +31,15 @@ output "vm_resources" {
     disk      = var.disk_size
   }
 }
+
+output "service_account_binding" {
+  description = "Service Account Binding Information"
+  value = var.service_account_binding ? {
+    enabled              = true
+    service_account_name = try(var.service_account_name, null) != null ? var.service_account_name : "${var.name}-sa"
+    } : {
+    enabled = false
+  }
+}
+
+

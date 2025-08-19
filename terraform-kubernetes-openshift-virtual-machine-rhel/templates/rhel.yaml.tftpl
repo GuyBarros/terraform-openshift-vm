@@ -47,6 +47,10 @@ spec:
             - disk:
                 bus: virtio
               name: cloudinitdisk
+%{ if service_account_binding }              
+            - disk: {}
+              name: '${service_account_name}-disk'
+%{ endif }
           interfaces:
             - masquerade: {}
               model: virtio
@@ -79,4 +83,14 @@ spec:
               user: ${cloud_user}
               password: ${cloud_user_password}
               chpasswd: { expire: False }
+%{ if service_account_binding }
+              bootcmd:
+                - "mkdir -p /var/run/secrets/kubernetes.io/serviceaccount"
+                - "mount -o,uid=1000 /dev/sda /var/run/secrets/kubernetes.io/serviceaccount"
+%{ endif }
           name: cloudinitdisk
+%{ if service_account_binding }
+        - name: '${service_account_name}-disk'
+          serviceAccount:
+            serviceAccountName: '${service_account_name}'
+%{ endif }

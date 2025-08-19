@@ -29,6 +29,18 @@ variable "namespace" {
   default     = "default"
 }
 
+variable "service_account_binding" {
+  description = "Binds a Service Account identity to the virtual machine. if no Service Account name is provided, a default one will be created."
+  type        = bool
+  default     = false
+}
+
+variable "service_account_name" {
+  description = "Name of the Service Account to bind to the VM."
+  type        = string
+  default     = null
+}
+
 # Resource Configuration
 variable "cpu_cores" {
   description = "Number of CPU cores per socket"

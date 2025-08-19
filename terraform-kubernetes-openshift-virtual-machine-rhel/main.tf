@@ -15,15 +15,34 @@ locals {
   vm_password = var.cloud_user_password != "" ? var.cloud_user_password : random_password.vm_password[0].result
 }
 
+# Create service account if binding is enabled and no custom name is provided
+resource "kubectl_manifest" "service_account" {
+  count = var.service_account_binding && try(var.service_account_name, null) == null ? 1 : 0
+
+  yaml_body = yamlencode({
+    apiVersion = "v1"
+    kind       = "ServiceAccount"
+    metadata = {
+      name      = "${var.name}-sa"
+      namespace = var.namespace
+    }
+  })
+}
+
 resource "kubectl_manifest" "kubevirt_vm" {
-  yaml_body = templatefile("${path.module}/templates/rhel.yaml", {
+  yaml_body = templatefile("${path.module}/templates/rhel.yaml.tftpl", {
     # Core identifiers
     name      = var.name
     namespace = var.namespace
 
+    # Service Account bindings
+    service_account_binding = var.service_account_binding
+    service_account_name    = try(var.service_account_name, null) != null ? var.service_account_name : "${var.name}-sa"
+
     # Resource configuration
     cpu_cores   = var.cpu_cores
     cpu_sockets = var.cpu_sockets
+
     cpu_threads = var.cpu_threads
     memory      = var.memory
     disk_size   = var.disk_size
@@ -46,3 +65,4 @@ resource "kubectl_manifest" "kubevirt_vm" {
     run_strategy = var.run_strategy
   })
 }
+
