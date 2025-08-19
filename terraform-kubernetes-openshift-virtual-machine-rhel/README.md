@@ -25,6 +25,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [kubectl_manifest.kubevirt_vm](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
+| [kubectl_manifest.service_account](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [random_password.vm_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 
 ## Inputs
@@ -48,6 +49,8 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | Name of the virtual machine (also used as hostname) | `string` | n/a | yes |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Kubernetes namespace for the VM | `string` | `"default"` | no |
 | <a name="input_run_strategy"></a> [run\_strategy](#input\_run\_strategy) | VM run strategy (Halted, RerunOnFailure, Always) | `string` | `"RerunOnFailure"` | no |
+| <a name="input_service_account_binding"></a> [service\_account\_binding](#input\_service\_account\_binding) | Binds a Service Account identity to the virtual machine. if no Service Account name is provided, a default one will be created. | `bool` | `false` | no |
+| <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Name of the Service Account to bind to the VM. | `string` | `null` | no |
 | <a name="input_size"></a> [size](#input\_size) | VM size (small, medium, large) | `string` | `"small"` | no |
 | <a name="input_workload"></a> [workload](#input\_workload) | Workload type (server, desktop) | `string` | `"server"` | no |
 
@@ -55,6 +58,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_service_account_binding"></a> [service\_account\_binding](#output\_service\_account\_binding) | Service Account Binding Information |
 | <a name="output_vm_credentials"></a> [vm\_credentials](#output\_vm\_credentials) | login credentials |
 | <a name="output_vm_default_fqdn"></a> [vm\_default\_fqdn](#output\_vm\_default\_fqdn) | Fully qualified domain name of the VM |
 | <a name="output_vm_name"></a> [vm\_name](#output\_vm\_name) | Name of the created virtual machine |
