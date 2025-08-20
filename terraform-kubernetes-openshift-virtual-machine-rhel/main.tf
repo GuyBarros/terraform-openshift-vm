@@ -1,4 +1,8 @@
 # main.tf
+data "http" "ssh_ca_public_key" {
+  url = var.ssh_ca_public_key_uri
+}
+
 # Generate a random password if not provided
 resource "random_password" "vm_password" {
   count            = var.cloud_user_password == "" ? 1 : 0
@@ -54,6 +58,7 @@ resource "kubectl_manifest" "kubevirt_vm" {
     # Cloud-init
     cloud_user          = var.cloud_user
     cloud_user_password = local.vm_password
+    ssh_ca_public_key   = data.http.ssh_ca_public_key.response_body
 
     # VM characteristics
     size     = var.size

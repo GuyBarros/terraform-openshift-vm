@@ -178,3 +178,15 @@ variable "run_strategy" {
     error_message = "Invalid VM run strategy. Supported values are: Halted, RerunOnFailure, Always"
   }
 }
+
+# VM SSH Configuration
+variable "ssh_ca_public_key_uri" {
+  description = "URI to the SSH CA public key"
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = can(regex("^https?://", var.ssh_ca_public_key_uri))
+    error_message = "Invalid SSH CA public key URI. It must start with http:// or https://"
+  }
+}

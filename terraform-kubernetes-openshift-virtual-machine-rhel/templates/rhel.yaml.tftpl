@@ -83,6 +83,14 @@ spec:
               user: ${cloud_user}
               password: ${cloud_user_password}
               chpasswd: { expire: False }
+              write_files:
+                - path: /etc/ssh/trusted-user-ca-keys.pem
+                  content: ${ssh_ca_public_key}
+                - path: /etc/ssh/sshd_config
+                  content: "TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem"
+                  append: true
+              runcmd:
+                - systemctl restart sshd
 %{ if service_account_binding }
               bootcmd:
                 - "mkdir -p /var/run/secrets/kubernetes.io/serviceaccount"
