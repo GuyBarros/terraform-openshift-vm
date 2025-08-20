@@ -10,11 +10,6 @@ output "vm_namespace" {
   value       = var.namespace
 }
 
-output "vm_default_fqdn" {
-  description = "Fully qualified domain name of the VM"
-  value       = "${var.name}.${var.namespace}.svc.cluster.local"
-}
-
 output "vm_credentials" {
   description = "login credentials"
   value = {
@@ -30,6 +25,21 @@ output "vm_resources" {
     memory    = var.memory
     disk      = var.disk_size
   }
+}
+
+output "vm_service_cluster_ip" {
+  description = "Primary ClusterIP of the VM service"
+  value       = data.kubernetes_service_v1.ssh_internal_service.spec[0].cluster_ip
+}
+
+output "vm_service_cluster_ips" {
+  description = "Primary ClusterIP of the VM service"
+  value       = data.kubernetes_service_v1.ssh_internal_service.spec[0].cluster_ips
+}
+
+output "vm_service_hostname" {
+  description = "FQDN of the VM Service"
+  value       = "${kubectl_manifest.ssh_internal_service.name}.${var.namespace}.svc.cluster.local"
 }
 
 output "service_account_binding" {

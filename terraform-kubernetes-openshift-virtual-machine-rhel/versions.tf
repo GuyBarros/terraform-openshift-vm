@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/http"
       version = "~> 3.5"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.38"
+    }
   }
 }
 
@@ -28,8 +32,6 @@ provider "kubernetes" {
   host     = var.cluster_api_url
   insecure = var.cluster_insecure_skip_tls_verify
 }
-
-
 
 provider "http" {}
 provider "random" {}

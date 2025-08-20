@@ -14,6 +14,9 @@ resource "random_password" "vm_password" {
   numeric          = true
 }
 
+resource "random_uuid" "vm_uuid" {
+}
+
 # Local value to use either provided or generated password
 locals {
   vm_password = var.cloud_user_password != "" ? var.cloud_user_password : random_password.vm_password[0].result
@@ -38,6 +41,7 @@ resource "kubectl_manifest" "kubevirt_vm" {
     # Core identifiers
     name      = var.name
     namespace = var.namespace
+    vm_uuid   = random_uuid.vm_uuid.result
 
     # Service Account bindings
     service_account_binding = var.service_account_binding
@@ -68,6 +72,15 @@ resource "kubectl_manifest" "kubevirt_vm" {
     # System configuration
     machine_type = var.machine_type
     run_strategy = var.run_strategy
+  })
+}
+
+resource "kubectl_manifest" "ssh_internal_service" {
+  yaml_body = templatefile("${path.module}/templates/ssh.yaml.tftpl", {
+    # Core identifiers
+    name      = var.name
+    namespace = var.namespace
+    vm_uuid   = random_uuid.vm_uuid.result
   })
 }
 

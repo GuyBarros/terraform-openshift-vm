@@ -32,6 +32,7 @@ spec:
         kubevirt.io/domain: ${name}
         kubevirt.io/size: ${size}
         network.kubevirt.io/headlessService: headless
+        terraform/uuid: ${vm_uuid}
     spec:
       architecture: amd64
       domain:

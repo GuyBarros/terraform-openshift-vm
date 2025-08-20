@@ -6,14 +6,18 @@ Module to create RHEL, CentOS Stream, and Fedora virtual machine on an OpenShift
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.5 |
 | <a name="requirement_kubectl"></a> [kubectl](#requirement\_kubectl) | ~> 1.19 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.38 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
+| <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | 1.19.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.38.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.7.2 |
 
 ## Modules
@@ -26,7 +30,11 @@ No modules.
 |------|------|
 | [kubectl_manifest.kubevirt_vm](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [kubectl_manifest.service_account](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
+| [kubectl_manifest.ssh_internal_service](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs/resources/manifest) | resource |
 | [random_password.vm_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [random_uuid.vm_uuid](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
+| [http_http.ssh_ca_public_key](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
+| [kubernetes_service_v1.ssh_internal_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service_v1) | data source |
 
 ## Inputs
 
@@ -52,6 +60,7 @@ No modules.
 | <a name="input_service_account_binding"></a> [service\_account\_binding](#input\_service\_account\_binding) | Binds a Service Account identity to the virtual machine. if no Service Account name is provided, a default one will be created. | `bool` | `false` | no |
 | <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Name of the Service Account to bind to the VM. | `string` | `null` | no |
 | <a name="input_size"></a> [size](#input\_size) | VM size (small, medium, large) | `string` | `"small"` | no |
+| <a name="input_ssh_ca_public_key_uri"></a> [ssh\_ca\_public\_key\_uri](#input\_ssh\_ca\_public\_key\_uri) | URI to the SSH CA public key | `string` | `""` | no |
 | <a name="input_workload"></a> [workload](#input\_workload) | Workload type (server, desktop) | `string` | `"server"` | no |
 
 ## Outputs
@@ -60,8 +69,10 @@ No modules.
 |------|-------------|
 | <a name="output_service_account_binding"></a> [service\_account\_binding](#output\_service\_account\_binding) | Service Account Binding Information |
 | <a name="output_vm_credentials"></a> [vm\_credentials](#output\_vm\_credentials) | login credentials |
-| <a name="output_vm_default_fqdn"></a> [vm\_default\_fqdn](#output\_vm\_default\_fqdn) | Fully qualified domain name of the VM |
 | <a name="output_vm_name"></a> [vm\_name](#output\_vm\_name) | Name of the created virtual machine |
 | <a name="output_vm_namespace"></a> [vm\_namespace](#output\_vm\_namespace) | Namespace of the created virtual machine |
 | <a name="output_vm_resources"></a> [vm\_resources](#output\_vm\_resources) | Configured VM resources |
+| <a name="output_vm_service_cluster_ip"></a> [vm\_service\_cluster\_ip](#output\_vm\_service\_cluster\_ip) | Primary ClusterIP of the VM service |
+| <a name="output_vm_service_cluster_ips"></a> [vm\_service\_cluster\_ips](#output\_vm\_service\_cluster\_ips) | Primary ClusterIP of the VM service |
+| <a name="output_vm_service_hostname"></a> [vm\_service\_hostname](#output\_vm\_service\_hostname) | FQDN of the VM Service |
 <!-- END_TF_DOCS -->
