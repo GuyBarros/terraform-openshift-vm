@@ -23,7 +23,6 @@ variable "name" {
 variable "namespace" {
   description = "Kubernetes namespace for the VM"
   type        = string
-  default     = "default"
 }
 
 variable "ssh_ca_public_key_uri" {
