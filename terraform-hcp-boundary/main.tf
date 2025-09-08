@@ -36,7 +36,7 @@ resource "boundary_target" "vm_ssh" {
 }
 
 resource "boundary_alias_target" "ssh_alias" {
-  name           = "OpenshiftVM SSH Target Alias"
+  name           = "${var.target_name} global alias"
   description    = "Alais for Openshift VM SSH targets"
   scope_id       = "global"
   value          = var.vm_address_alias
