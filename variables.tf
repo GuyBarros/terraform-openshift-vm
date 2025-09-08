@@ -1,11 +1,13 @@
 variable "cluster_token" {
   description = "OpenShift cluster authentication token"
   type        = string
+  default      = ""
 }
 
 variable "cluster_api_url" {
   description = "OpenShift API URL"
   type        = string
+  default      = ""
 }
 
 variable "cluster_insecure_skip_tls_verify" {
@@ -44,11 +46,13 @@ variable "vault_namespace" {
 
 variable "vault_address" {
   description = "the Vault Address"
+  default      = ""
 }
 
 variable "vault_token" {
   description = "the Vault Address"
   sensitive   = true
+  default      = ""
 }
 
 variable "boundary_address" {
