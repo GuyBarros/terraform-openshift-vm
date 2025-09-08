@@ -39,21 +39,6 @@ variable "ssh_ca_public_key_uri" {
 }
 # Boundary Target Module
 
-variable "vault_namespace" {
-  description = "the HCP Vault namespace we will use for mounting the database secret engine"
-  default     = "admin"
-}
-
-variable "vault_address" {
-  description = "the Vault Address"
-  default      = ""
-}
-
-variable "vault_token" {
-  description = "the Vault Address"
-  sensitive   = true
-  default      = ""
-}
 
 variable "boundary_address" {
   description = "Boundary Host"

@@ -18,30 +18,7 @@ data "boundary_scope" "app_infra" {
 
 
 
-resource "boundary_host_catalog_static" "backend_servers" {
-  name        = "backend_servers"
-  description = "Backend servers host catalog"
-  scope_id    = data.boundary_scope.app_infra.id
-}
-
-resource "boundary_host_static" "backend_servers" {
-  type            = "static"
-  name            = "VM on Openshift"
-  description     = "IP Address for the VM"
-  address         = var.vm_address
-  host_catalog_id = boundary_host_catalog_static.backend_servers.id
-}
-
-resource "boundary_host_set_static" "backend_servers_ssh" {
-  type            = "static"
-  name            = "backend_servers_ssh"
-  description     = "Host set for backend servers"
-  host_catalog_id = boundary_host_catalog_static.backend_servers.id
-  host_ids        = [boundary_host_static.backend_servers.id]
-}
-
-
-resource "boundary_target" "backend_servers_ssh" {
+resource "boundary_target" "vm_ssh" {
   type                     = "ssh"
   name                     = var.target_name
   description              = "Openshift SSH target"
@@ -50,9 +27,7 @@ resource "boundary_target" "backend_servers_ssh" {
   default_client_port      = "22"
   session_connection_limit = -1
   egress_worker_filter     = " \"${var.organization_name}\" in \"/tags/type\" "
-  host_source_ids = [
-    boundary_host_set_static.backend_servers_ssh.id
-  ]
+  address = var.vm_address
   injected_application_credential_source_ids = [
     var.boundary_cred_ssh_scope_id
   ]
@@ -65,7 +40,7 @@ resource "boundary_alias_target" "ssh_alias" {
   description    = "Alais for Openshift VM SSH targets"
   scope_id       = "global"
   value          = var.vm_address_alias
-  destination_id = boundary_target.backend_servers_ssh.id
+  destination_id = boundary_target.vm_ssh.id
   # authorize_session_host_id = boundary_host_static.bar.id
 }
 

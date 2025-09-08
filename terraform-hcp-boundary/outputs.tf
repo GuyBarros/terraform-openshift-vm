@@ -7,11 +7,11 @@ output "boundary_auth_string" {
 }
 
 output "ssh_target" {
-  value = boundary_target.backend_servers_ssh.id
+  value = boundary_target.vm_ssh.id
 }
 
 
 # SSh
 output "zz_boundary_connect_ssh" {
-  value = "boundary connect ssh  -target-id  ${boundary_target.backend_servers_ssh.id} --username ubuntu"
+  value = "boundary connect ssh  -target-id  ${boundary_target.vm_ssh.id} --username ubuntu"
 }

@@ -15,13 +15,11 @@ module "boundary-target" {
   boundary_auth_method_id = var.boundary_auth_method_id
   boundary_username       = var.boundary_username
   boundary_password       = var.boundary_password
-  vault_address           = var.vault_address
-  vault_namespace         = var.vault_namespace
-  vault_token             = var.vault_token
-
+  
   vm_address       = module.openshift-vm.vm_service_cluster_ip
   vm_address_alias = module.openshift-vm.vm_service_hostname
 
   organization_name = var.namespace
   target_name       = var.name
+  boundary_cred_ssh_scope_id = "clvsclt_nvyk4ej6Gu"
 }

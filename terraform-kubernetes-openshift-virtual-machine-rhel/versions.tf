@@ -34,6 +34,3 @@ provider "kubernetes" {
   insecure = var.cluster_insecure_skip_tls_verify
 }
 
-
-provider "http" {}
-provider "random" {}
