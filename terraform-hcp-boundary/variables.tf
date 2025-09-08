@@ -1,6 +1,11 @@
-variable "landing_zone_name" {
+variable "organization_name" {
   type        = string
-  description = "Landing zone identifier for all resources in this project"
+  description = "The name of the organization which the target will be associated with"
+}
+
+variable "target_name" {
+  type        = string
+  description = "The name of the organization which the target will be associated with"
 }
 
 /// Vault Config 
@@ -61,4 +66,14 @@ variable "boundary_password" {
 variable "boundary_ingress_worker_count" {
   description = "count of ingress workers do deploy on nomad"
   default     = 3
+}
+
+variable "vm_address" {
+  description = "VM Address"
+  default     = "172.31.243.230"
+}
+
+variable "vm_address_alias" {
+  description = "VM Address Alias"
+  default     = "test-vm.demo.svc.cluster.local"
 }

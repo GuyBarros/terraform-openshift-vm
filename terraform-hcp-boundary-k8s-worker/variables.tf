@@ -6,7 +6,6 @@ variable "landing_zone_name" {
 variable "hcp_boundary_cluster_id" {
   description = "The HCP Boundary cluster ID"
   type        = string
-  default     = "6f14cf8d-21a9-4421-ab43-562fbfe9fa64"
 }
 
 variable "boundary_address" {
