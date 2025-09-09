@@ -59,3 +59,8 @@ variable "boundary_password" {
   description = "Boundary Password"
   default     = ""
 }
+
+variable "boundary_cred_ssh_scope_id" {
+  description = "Boundary SSH Credential Scope ID"
+  default     = ""
+}

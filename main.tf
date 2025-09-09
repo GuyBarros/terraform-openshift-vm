@@ -21,5 +21,5 @@ module "boundary-target" {
 
   organization_name = var.namespace
   target_name       = var.name
-  boundary_cred_ssh_scope_id = "clvsclt_nvyk4ej6Gu"
+  boundary_cred_ssh_scope_id = var.boundary_cred_ssh_scope_id
 }

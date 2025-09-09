@@ -65,3 +65,8 @@ variable "vault_token" {
   description = "the Vault Address"
   sensitive   = true
 }
+
+variable "admin_policy_id" {
+  description = "the Boundary Admin Policy ID"
+  default     = "r_KFFe33LH99"
+}
